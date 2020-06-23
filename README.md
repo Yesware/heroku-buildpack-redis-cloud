@@ -14,7 +14,7 @@ This buildpack contains only small changes from the base [Heroku Redis Buildpack
 First you need to set this buildpack as your initial buildpack with:
 
 ```console
-$ heroku buildpacks:add -i 1 https://github.com/faros-ai/heroku-buildpack-redis-cloud.git
+$ heroku buildpacks:add -i 1 https://github.com/Yesware/heroku-buildpack-redis-cloud.git
 ```
 
 Then confirm you are using this buildpack as well as your language buildpack like so:
@@ -22,7 +22,7 @@ Then confirm you are using this buildpack as well as your language buildpack lik
 ```console
 $ heroku buildpacks
 === frozen-potato-95352 Buildpack URLs
-1. https://github.com/faros-ai/heroku-buildpack-redis-cloud.git
+1. https://github.com/Yesware/heroku-buildpack-redis-cloud.git
 2. heroku/python
 ```
 
@@ -69,7 +69,7 @@ We're then ready to deploy to Heroku with an encrypted connection between the dy
     ...
     -----> Fetching custom git buildpack... done
     -----> Multipack app detected
-    =====> Downloading Buildpack: https://github.com/faros-ai/heroku-buildpack-redis-cloud.git
+    =====> Downloading Buildpack: https://github.com/Yesware/heroku-buildpack-redis-cloud.git
     =====> Detected Framework: stunnel
            Using stunnel version: 5.02
            Using stack version: cedar
