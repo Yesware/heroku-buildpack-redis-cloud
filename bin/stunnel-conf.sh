@@ -36,17 +36,28 @@ EOFEOF
 for URL in $URLS
 do
   eval URL_VALUE=\$$URL
-  PARTS=$(echo $URL_VALUE | perl -lne 'print "$1 $2 $3 $4 $5 $6 $7" if /^([^:]+):\/\/([^:]+):([^@]+)@(.*?):(.*?)(\/(.*?)(\\?.*))?$/')
-  URI=( $PARTS )
-  URI_SCHEME=${URI[0]}
-  URI_USER=${URI[1]}
-  URI_PASS=${URI[2]}
-  URI_HOST=${URI[3]}
-  URI_PORT=${URI[4]}
+  if [[ ${URL_VALUE} =~ "memcached-" ]]; then
+    PARTS=$(echo $URL_VALUE | perl -lne 'print "$1 $2" if /^(.*?):(.*?)$/')
+    URI=( $PARTS )
+    URI_HOST=${URI[0]}
+    URI_PORT=${URI[1]}
 
-  echo "Setting ${URL}_STUNNEL config var"
-  export ${URL}_STUNNEL=$URI_SCHEME://$URI_USER:$URI_PASS@127.0.0.1:637${n}
+    echo "Setting ${URL}_STUNNEL config var"
+    export ${URL}_STUNNEL=127.0.0.1:637${n}
 
+  else
+    PARTS=$(echo $URL_VALUE | perl -lne 'print "$1 $2 $3 $4 $5 $6 $7" if /^([^:]+):\/\/([^:]+):([^@]+)@(.*?):(.*?)(\/(.*?)(\\?.*))?$/')
+    URI=( $PARTS )
+    URI_SCHEME=${URI[0]}
+    URI_USER=${URI[1]}
+    URI_PASS=${URI[2]}
+    URI_HOST=${URI[3]}
+    URI_PORT=${URI[4]}
+
+    echo "Setting ${URL}_STUNNEL config var"
+    export ${URL}_STUNNEL=$URI_SCHEME://$URI_USER:$URI_PASS@127.0.0.1:637${n}
+
+  fi
   cat >> /app/vendor/stunnel/stunnel.conf << EOFEOF
 [$URL]
 client = yes
