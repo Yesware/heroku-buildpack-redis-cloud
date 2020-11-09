@@ -45,14 +45,14 @@ Some settings are configurable through app config vars at runtime:
 - ``STUNNEL_CERT``: Paste in the client certificate to use for connecting to Redis Cloud. This is the same certificate
 used when configuring the redis instance for SSL
 - ``STUNNEL_KEY``: Paste in the private key for the client certificate. If you had Redis Cloud generate your cert, this key is in the zip file.
-- ``STUNNEL_CA``: Paste in the certificate CA. If you had Redis Cloud generate the cert, this is also in the zip file provided.
+- ``STUNNEL_CA``: Paste in the certificate CA. If you had Redis Cloud generate the cert, this is also in the zip file provided.  If omitted, a default certificate CA will be used.
 - ``STUNNEL_ENABLED``: Defaults to `true`, set to `false` to disable stunnel.
 - ``STUNNEL_FORCE_TLS``: Default is unset. Set this var, to force TLSv1 on cedar-10.
 - ``REDIS_STUNNEL_URLS``: Use this to specify for which Redis URLs (environment variables) to activate the SSL tunnel.
 For instance, ``$ heroku config:add REDIS_STUNNEL_URLS="CACHE_URL SESSION_STORE_URL"`` to specify two redis instances
 with URLS set to `CACHE_URL` and `SESSION_STORE_URL` vars.
 
-`STUNNEL_CERT`, `STUNNEL_KEY`, and `STUNNEL_CA` are required.
+`STUNNEL_CERT` and `STUNNEL_KEY` are required.
 
 ### Update your Procfile
 
