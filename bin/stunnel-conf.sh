@@ -12,7 +12,14 @@ fi
 mkdir -p /app/vendor/stunnel/var/run/stunnel/
 echo "$STUNNEL_CERT" > /app/vendor/stunnel/stunnel.crt
 echo "$STUNNEL_KEY" > /app/vendor/stunnel/stunnel.key
-echo "$STUNNEL_CA" > /app/vendor/stunnel/stunnel_ca.crt
+
+# Use the default certificate CA if not provided
+if [ -z "${STUNNEL_CA}" ]; then
+  cp /app/config/default_stunnel_ca.crt /app/vendor/stunnel/stunnel_ca.crt
+else
+  echo "$STUNNEL_CA" > /app/vendor/stunnel/stunnel_ca.crt
+fi
+
 cat >> /app/vendor/stunnel/stunnel.conf << EOFEOF
 foreground = yes
 

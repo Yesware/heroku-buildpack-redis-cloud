@@ -28,4 +28,8 @@ mkdir -p $BUILD_DIR/bin
 cp "$BUILDPACK_DIR/bin/run-stunnel" $BUILD_DIR/bin/
 chmod +x $BUILD_DIR/bin/run-stunnel
 
+echo "-----> Moving the run-stunnel default certificate ca into app/config"
+mkdir -p $BUILD_DIR/config
+cp "$BUILDPACK_DIR/config/default_stunnel_ca.crt" $BUILD_DIR/config/
+
 echo "-----> stunnel done"
